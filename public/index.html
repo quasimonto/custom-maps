@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Maps Webapp</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+            #map-container {
+      width: 100%;
+      height: calc(100vh - 50px);
+    }
+        .hidden {
+          display: none;
+        }
+        
+        .modal {
+          display: none;
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: white;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+        }
+      
+        .modal-content {
+          display: flex;
+          flex-direction: column;
+        }
+      
+        #members-list-container {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          background-color: white;
+          padding: 10px;
+          border-radius: 8px;
+          box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+          }
+      </style>
+</head>
+<body>
+    <div id="map-container"></div>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="panel">
+                <h2>Members</h2>
+                <button id="add-member">Add Member</button>
+                <button id="show-members">Show Members</button>
+            </div>
+            <div class="panel">
+                <h2>Select Starting Location</h2>
+                <select id="country-select">
+                  <option value="" disabled selected>Select a country</option>
+                </select>
+              </div>
+            <div class="panel">
+                <h2>Groups</h2>
+                <div id="groups-list"></div>
+                <button id="add-group">Add Group</button>
+                <button id="auto-assign">Auto Assign</button>
+            </div>
+            <div class="panel">
+                <h2>Meeting Points</h2>
+                <div id="locations-list"></div>
+                <button id="add-location">Add Location</button>
+            </div>
+            <div class="panel">
+                <h2>Travel Times</h2>
+                <div id="travel-times"></div>
+            </div>
+        </div>
+        <div id="map-container"></div>
+    </div>
+
+    <!-- Modal templates for adding/editing -->
+    <div id="member-modal" class="modal">
+        <!-- Member form will go here -->
+    </div>
+    <div id="group-modal" class="modal">
+        <!-- Group form will go here -->
+    </div>
+    <div id="location-modal" class="modal">
+        <!-- Location form will go here -->
+    </div>
+<!-- Modal Overlay -->
+<div id="modal-overlay" class="modal-overlay"></div>
+
+<!-- Add Member Modal -->
+<div id="add-member-modal" class="modal">
+  <div class="modal-content">
+    <h3>Add Member</h3>
+    <label for="member-name">Name:</label>
+    <input type="text" id="member-name" placeholder="Enter name">
+
+    <label>Attributes:</label>
+    <div>
+      <input type="checkbox" id="elder">
+      <label for="elder">Elder</label>
+    </div>
+    <div>
+      <input type="checkbox" id="servent">
+      <label for="servent">Servent</label>
+    </div>
+    <div>
+      <input type="checkbox" id="spouse">
+      <label for="spouse">Spouse</label>
+    </div>
+    <div>
+      <input type="checkbox" id="kid">
+      <label for="kid">Kid</label>
+    </div>
+    <div>
+      <input type="checkbox" id="family-head">
+      <label for="family-head">Family Head</label>
+    </div>
+
+    <!-- Search field for address -->
+    <label for="address-search">Search Address:</label>
+    <input type="text" id="address-search" placeholder="Enter address">
+
+    <!-- Buttons -->
+    <button id="save-member">Save Member</button>
+    <button id="cancel-add-member">Cancel</button>
+  </div>
+</div>
+
+  <!-- List of members -->
+  <div id="members-list-container" class="members-list hidden">
+    <h3>Members List</h3>
+    <input type="text" id="member-filter" placeholder="Filter by name">
+    <ul id="members-list"></ul>
+  </div>
+
+  
+    <script src="app.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAplc33ji4O8J0mT1tn-4V53rAknLfywWw&callback=initMap&libraries=places" defer></script>
+
+</body>
+</html>
